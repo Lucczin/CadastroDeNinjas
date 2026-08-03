@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Ninja</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            background: #fff;
+            margin: 0 auto;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .ninja-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #4CAF50;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        h2 {
+            margin: 10px 0 20px 0;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .info p {
+            font-size: 1.1em;
+            margin: 8px 0;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info strong {
+            color: #4CAF50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background: #4caf50;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            font-size: 1em;
+        }
+
+        table tbody tr:hover {
+            background: #e8f5e9;
+        }
+
+        a.btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 5px 10px rgba(76,175,80,0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        a.btn-back:hover {
+            background-color: #388e3c;
+        }
+
+        /* Responsividade */
+        @media(max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .ninja-img {
+                width: 140px;
+                height: 140px;
+            }
+            .info p {
+                font-size: 1em;
+                max-width: 100%;
+                margin: 0 0 10px 0;
+            }
+            table th, table td {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Detalhes do Ninja</h1>
+
+    <img th:src="${ninja.imgUrl}" alt="Foto do Ninja" class="ninja-img" />
+
+    <h2 th:text="${ninja.nome}">Nome do Ninja</h2>
+
+    <div class="info">
+        <p><strong>Email:</strong> <span th:text="${ninja.email}">email@ninja.com</span></p>
+        <p><strong>Idade:</strong> <span th:text="${ninja.idade}">25</span></p>
+        <p><strong>Rank:</strong> <span th:text="${ninja.rank}">Jounin</span></p>
+    </div>
+
+    <h3>Missões</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Dificuldade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="missao : ${ninja.missoes}">
+            <td th:text="${missao.nome}">Missão X</td>
+            <td th:text="${missao.dificuldade}">Difícil</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/ninjas/ui/listar" class="btn-back">Voltar para a lista</a>
+</div>
+
+</body>
+</html>
